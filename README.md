@@ -16,6 +16,14 @@
 
 ---
 
+## 📸 Screenshots
+
+| Editor ready | Agents responding |
+|:---:|:---:|
+| ![Polymath IDE — empty editor](screenshots/ide-empty.png) | ![Polymath IDE — agents responding](screenshots/ide-agents.png) |
+
+---
+
 ## 🏗 Architecture
 
 ```

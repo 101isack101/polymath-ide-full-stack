@@ -14,8 +14,20 @@ const allowedOrigins = process.env.ALLOWED_ORIGINS
   : '*';
 app.use(cors({ origin: allowedOrigins }));
 
-// Security headers (CSP, HSTS, X-Frame-Options, etc.)
-app.use(helmet());
+// Security headers — CSP configured for Monaco Editor (requires unsafe-inline + unsafe-eval)
+app.use(helmet({
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'none'"],
+      scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", "https://cdnjs.cloudflare.com"],
+      styleSrc:  ["'self'", "'unsafe-inline'", "https://cdnjs.cloudflare.com"],
+      connectSrc: ["'self'"],
+      fontSrc:   ["https://cdnjs.cloudflare.com"],
+      imgSrc:    ["'self'", "data:"],
+      workerSrc: ["'self'", "blob:"],
+    }
+  }
+}));
 
 // Limit body size at framework level to prevent DoS via large payloads
 app.use(express.json({ limit: '100kb' }));
